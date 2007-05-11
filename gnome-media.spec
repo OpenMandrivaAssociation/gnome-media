@@ -6,7 +6,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.18.0
-Release: %mkrel 3
+Release: %mkrel 4
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -23,6 +23,8 @@ BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 # (fc) 2.3.90-2mdk disable sound event if needed
 Patch2:		gnome-media-2.14.0-esd.patch
+# (fc) 2.18.0-4mdv fix modality in profile editor (Mdv bug #29934) (SVN)
+Patch3:		gnome-media-2.18.0-fixmodality.patch
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
@@ -75,6 +77,7 @@ Panel libraries and header files for GNOME media.
 %prep
 %setup -q 
 %patch2 -p1 -b .esd
+%patch3 -p1 -b .fixmodality
 
 %build
 
