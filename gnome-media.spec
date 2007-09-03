@@ -1,4 +1,5 @@
 %define lib_name %mklibname cddb-slave 2 %{lib_major}
+%define develname %mklibname -d cddb-slave 2
 %define lib_major 0
 %define req_gail_version			0.13
 %define req_gstreamer_version		0.10
@@ -6,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.18.0
-Release: %mkrel 4
+Release: %mkrel 5
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -21,6 +22,7 @@ BuildRequires: libnautilus-burn-devel >= 2.9.0
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch: gnome-media-2.18.0-desktopentry.patch
 # (fc) 2.3.90-2mdk disable sound event if needed
 Patch2:		gnome-media-2.14.0-esd.patch
 # (fc) 2.18.0-4mdv fix modality in profile editor (Mdv bug #29934) (SVN)
@@ -63,19 +65,21 @@ Requires:	%{name} >= %{version}
 %description -n %{lib_name}
 libraries for running GNOME media.
 
-%package -n %{lib_name}-devel
+%package -n %develname
 Summary:	Static libraries, include files for GNOME media
 Group:		Development/GNOME and GTK+
 Provides:	libcddb-slave2-devel = %{version}-%{release}
 Requires:	%{lib_name} = %{version}-%{release}
+Obsoletes: %mklibname -d cddb-slave 2 0
 
-%description -n %{lib_name}-devel
+%description -n %develname
 Panel libraries and header files for GNOME media.
 
 
 
 %prep
 %setup -q 
+%patch -p1
 %patch2 -p1 -b .esd
 %patch3 -p1 -b .fixmodality
 
@@ -227,9 +231,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n  %{lib_name}
 %defattr(-, root, root)
-%{_libdir}/*.so.*
+%{_libdir}/libcddb-slave2.so.%{lib_major}*
+%{_libdir}/libgnome-media-profiles.so.%{lib_major}*
 
-%files -n  %{lib_name}-devel
+%files -n  %develname
 %defattr(-, root, root)
 %{_libdir}/*.so
 %attr(644,root,root) %{_libdir}/*.la
