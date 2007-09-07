@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.19.92
-Release: %mkrel 1
+Release: %mkrel 2
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -29,8 +29,6 @@ Patch: gnome-media-2.19.92-desktopentry.patch
 Patch2:		gnome-media-2.14.0-esd.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
-Requires:   gstreamer0.10-audiosink >= %{req_gstreamer_version}
-Requires:   gstreamer0.10-audiosrc >= %{req_gstreamer_version}
 Requires:   gstreamer0.10-cdparanoia >= %{req_gstreamer_version}
 Requires:   gstreamer0.10-plugins-good
 Requires:   gstreamer0.10-plugins-base
@@ -85,10 +83,7 @@ Panel libraries and header files for GNOME media.
 
 %configure2_5x
 
-#parallel build is broken
-make
-cd vu-meter
-make vumeter.desktop
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -96,80 +91,17 @@ rm -rf $RPM_BUILD_ROOT
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
 rm -f %buildroot%{_libdir}/libglade/2.0/libgnome-media-profiles.a
-rm -f %buildroot%_datadir/applications/vumeter.desktop.in
-install -m 644 vu-meter/vumeter.desktop %buildroot%_datadir/applications/vumeter.desktop
 
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/gnome-cd" \
-	section="Multimedia/Sound" \
-	title="CD Player" \
-	longtitle="Play audio CDs" \
-	icon="%{_datadir}/pixmaps/gnome-cd.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/gnome-volume-control" \
-	section="Multimedia/Sound" \
-	title="Volume Control" \
-	longtitle="Adjust the volume level" \
-	icon="%{_datadir}/pixmaps/gnome-mixer.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/vumeter" \
-	section="Multimedia/Sound" \
-	title="Volume monitor" \
-	longtitle="Monitor the sound output volume" \
-	icon="%{_datadir}/pixmaps/gnome-vumeter.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/vumeter -r" \
-	section="Multimedia/Sound" \
-	title="Recording level monitor" \
-	longtitle="Monitor the recording input volume" \
-	icon="%{_datadir}/pixmaps/gnome-vumeter.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="x11" \
-	command="%{_bindir}/gnome-sound-recorder" \
-	section="Multimedia/Sound" \
-	title="Sound Recorder" \
-	longtitle="Record sound clips" \
-	icon="%{_datadir}/pixmaps/gnome-grecord.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/cddb-slave2-properties" \
-	section="System/Configuration/GNOME/Advanced" \
-	title="CD Database" \
-	longtitle="Modify your CD database preferences" \
-	icon="%{_datadir}/pixmaps/gnome-cd.png" \
-	startup_notify="true" xdg="true"
-?package(%{name}): \
-	needs="gnome" \
-	command="%{_bindir}/gstreamer-properties" \
-	section="System/Configuration/GNOME/Advanced" \
-	title="Multimedia Systems Selector" \
-	longtitle="Configure defaults for GStreamer applications" \
-	icon="%{_datadir}/pixmaps/gstreamer-properties.png" \
-	startup_notify="true" xdg="true"
-EOF
 desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-Multimedia-Sound" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gnome-cd.desktop,gnome-volume-control.desktop,vumeter.desktop,gnome-sound-recorder.desktop,reclevel.desktop}
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --remove-category="AdvancedSettings" \
   --add-category="DesktopSettings" \
-  --add-category="X-MandrivaLinux-System-Configuration-Gnome" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gstreamer-properties.desktop,cddb-slave.desktop}
 
+# don't display vumeter / reclevel in menu
+echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/vumeter.desktop
+echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/reclevel.desktop
+
+#hide gnome-volume-control in KDE
+echo 'NotShowIn=KDE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-control.desktop
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
@@ -222,7 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gstreamer-properties
 %{_datadir}/pixmaps/*
 %_datadir/icons/hicolor/*/*/*.*
-%{_menudir}/*
 %{_datadir}/idl/*
 
 %files -n  %{lib_name}
