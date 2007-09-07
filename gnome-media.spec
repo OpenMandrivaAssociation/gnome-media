@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.18.0
-Release: %mkrel 5
+Version: 2.19.92
+Release: %mkrel 1
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -16,18 +16,16 @@ BuildRequires: gail-devel >= %{req_gail_version}
 BuildRequires: libgstreamer-plugins-base-devel >= %{req_gstreamer_version}
 BuildRequires: gstreamer0.10-plugins-base
 BuildRequires:   gstreamer0.10-plugins-good
-BuildRequires: gnome-desktop-devel
+BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libnautilus-burn-devel >= 2.9.0
+BuildRequires: libxrender-devel
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch: gnome-media-2.18.0-desktopentry.patch
+Patch: gnome-media-2.19.92-desktopentry.patch
 # (fc) 2.3.90-2mdk disable sound event if needed
 Patch2:		gnome-media-2.14.0-esd.patch
-# (fc) 2.18.0-4mdv fix modality in profile editor (Mdv bug #29934) (SVN)
-Patch3:		gnome-media-2.18.0-fixmodality.patch
-
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
 Requires:   gstreamer0.10-audiosink >= %{req_gstreamer_version}
@@ -81,7 +79,6 @@ Panel libraries and header files for GNOME media.
 %setup -q 
 %patch -p1
 %patch2 -p1 -b .esd
-%patch3 -p1 -b .fixmodality
 
 %build
 
@@ -175,9 +172,6 @@ desktop-file-install --vendor="" \
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
-for omf in %buildroot%_datadir/omf/*/{*-??.omf,*-??_??.omf};do
- echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name-2.0.lang
-done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -187,6 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %define schemas CDDB-Slave2 gnome-cd gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %post_install_gconf_schemas %schemas
 %{update_menus}
+%update_icon_cache hicolor
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
@@ -194,6 +189,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %clean_scrollkeeper
 %{clean_menus}
+%clean_icon_cache hicolor
 
 %post -p /sbin/ldconfig -n %{lib_name}
 
@@ -224,8 +220,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
 %{_datadir}/pixmaps/*
-%dir %{_datadir}/omf/gnome-media
-%{_datadir}/omf/gnome-media/*-C.omf
+%_datadir/icons/hicolor/*/*/*.*
 %{_menudir}/*
 %{_datadir}/idl/*
 
