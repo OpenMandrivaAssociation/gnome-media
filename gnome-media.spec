@@ -20,6 +20,7 @@ BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libnautilus-burn-devel >= 2.9.0
 BuildRequires: libxrender-devel
+BuildRequires: gnome-doc-utils
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
