@@ -27,7 +27,6 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz
 Patch: gnome-media-2.19.92-desktopentry.patch
 # (fc) 2.3.90-2mdk disable sound event if needed
 Patch2:		gnome-media-2.14.0-esd.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
 Requires:   gstreamer0.10-cdparanoia >= %{req_gstreamer_version}
 Requires:   gstreamer0.10-plugins-good
