@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.20.1
-Release: %mkrel 3
+Version: 2.22.0
+Release: %mkrel 1
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -105,6 +105,9 @@ echo 'NotShowIn=KDE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-con
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
+for omf in %buildroot%_datadir/omf/*/{*-??.omf,};do
+echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buildroot!!)" >> %name-2.0.lang
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
