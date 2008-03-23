@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.22.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -56,7 +56,7 @@ CD player.
 
 %package -n %{lib_name}
 Summary:	%{summary}
-Group:		%{group}
+Group:		System/Libraries
 Requires:	%{name} >= %{version}
 
 %description -n %{lib_name}
