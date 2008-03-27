@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.22.0
-Release: %mkrel 2
+Release: %mkrel 3
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -18,22 +18,19 @@ BuildRequires: gstreamer0.10-plugins-base
 BuildRequires:   gstreamer0.10-plugins-good
 BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
-BuildRequires: libnautilus-burn-devel >= 2.9.0
 BuildRequires: libxrender-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: perl-XML-Parser
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch: gnome-media-2.19.92-desktopentry.patch
-# (fc) 2.3.90-2mdk disable sound event if needed
-Patch2:		gnome-media-2.14.0-esd.patch
+# (fc) 2.22.0-2mdv various SVN fixes
+Patch0: gnome-media-2.22.0-svnfixes.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
-Requires:   gstreamer0.10-cdparanoia >= %{req_gstreamer_version}
 Requires:   gstreamer0.10-plugins-good
 Requires:   gstreamer0.10-plugins-base
-Requires:   gstreamer0.10-flac
-Requires:   gstreamer0.10-speex
+Suggests:   gstreamer0.10-flac
+Suggests:   gstreamer0.10-speex
 Obsoletes:	grecord
 Provides:	grecord
 Requires(post):	scrollkeeper >= 0.3
@@ -76,12 +73,11 @@ Panel libraries and header files for GNOME media.
 
 %prep
 %setup -q 
-%patch -p1
-%patch2 -p1 -b .esd
+%patch0 -p1 -b .svnfixes
 
 %build
 
-%configure2_5x
+%configure2_5x --disable-gnomecd 
 
 %make
 
@@ -114,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_scrollkeeper
-%define schemas CDDB-Slave2 gnome-cd gnome-sound-recorder gnome-audio-profiles gnome-volume-control
+%define schemas CDDB-Slave2 gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %post_install_gconf_schemas %schemas
 %{update_menus}
 %update_icon_cache hicolor
@@ -135,7 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_sysconfdir}/gconf/schemas/CDDB-Slave2.schemas
-%{_sysconfdir}/gconf/schemas/gnome-cd.schemas
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
 %{_sysconfdir}/gconf/schemas/gnome-volume-control.schemas
@@ -146,7 +141,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libglade/2.0/libgnome-media-profiles.so
 %{_libdir}/libglade/2.0/libgnome-media-profiles.la
 %{_datadir}/applications/cddb-slave.desktop
-%{_datadir}/applications/gnome-cd.desktop
 %{_datadir}/applications/gnome-sound-recorder.desktop
 %{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
@@ -155,7 +149,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
-%{_datadir}/pixmaps/*
 %_datadir/icons/hicolor/*/*/*.*
 %{_datadir}/idl/*
 
