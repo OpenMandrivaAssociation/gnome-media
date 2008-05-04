@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.22.0
-Release: %mkrel 3
+Release: %mkrel 4
 License:	LGPL
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -96,8 +96,8 @@ desktop-file-install --vendor="" \
 echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/vumeter.desktop
 echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/reclevel.desktop
 
-#hide gnome-volume-control in KDE
-echo 'NotShowIn=KDE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-control.desktop
+#hide gnome-volume-control in KDE and ofcourse on Xfce
+echo 'NotShowIn=KDE;XFCE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-control.desktop
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
@@ -164,5 +164,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 %{_libdir}/pkgconfig/gnome-media-profiles.pc
 %{_includedir}/*
-
-
