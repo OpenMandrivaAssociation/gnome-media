@@ -109,19 +109,25 @@ done
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%if %mdkversion < 200900
 %update_scrollkeeper
+%endif
 %define schemas CDDB-Slave2 gnome-sound-recorder gnome-audio-profiles gnome-volume-control
+%if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
 %{update_menus}
 %update_icon_cache hicolor
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
 
+%if %mdkversion < 200900
 %postun
 %clean_scrollkeeper
 %{clean_menus}
 %clean_icon_cache hicolor
+%endif
 
 %if %mdkversion < 200900
 %post -p /sbin/ldconfig -n %{lib_name}
