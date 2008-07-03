@@ -6,9 +6,9 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.22.0
-Release: %mkrel 4
-License:	LGPL
+Version: 2.23.3
+Release: %mkrel 1
+License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
 BuildRequires:	ncurses-devel scrollkeeper sendmail-command
@@ -20,11 +20,9 @@ BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libxrender-devel
 BuildRequires: gnome-doc-utils
-BuildRequires: perl-XML-Parser
+BuildRequires: intltool >= 0.35
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-# (fc) 2.22.0-2mdv various SVN fixes
-Patch0: gnome-media-2.22.0-svnfixes.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
 Requires:   gstreamer0.10-plugins-good
@@ -73,7 +71,6 @@ Panel libraries and header files for GNOME media.
 
 %prep
 %setup -q 
-%patch0 -p1 -b .svnfixes
 
 %build
 
@@ -90,11 +87,7 @@ rm -f %buildroot%{_libdir}/libglade/2.0/libgnome-media-profiles.a
 
 desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/{gstreamer-properties.desktop,cddb-slave.desktop}
-
-# don't display vumeter / reclevel in menu
-echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/vumeter.desktop
-echo 'NoDisplay=true' >>$RPM_BUILD_ROOT%{_datadir}/applications/reclevel.desktop
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gstreamer-properties.desktop
 
 #hide gnome-volume-control in KDE and ofcourse on Xfce
 echo 'NotShowIn=KDE;XFCE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-control.desktop
@@ -111,8 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %if %mdkversion < 200900
 %update_scrollkeeper
+%define schemas gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %endif
-%define schemas CDDB-Slave2 gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
 %{update_menus}
@@ -140,31 +133,22 @@ rm -rf $RPM_BUILD_ROOT
 %files -f  %{name}-2.0.lang
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_sysconfdir}/gconf/schemas/CDDB-Slave2.schemas
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
 %{_sysconfdir}/gconf/schemas/gnome-volume-control.schemas
 %{_bindir}/*
-%{_libexecdir}/CDDBSlave2
-%{_libexecdir}/cddb-track-editor
-%{_libdir}/bonobo/servers/*
 %{_libdir}/libglade/2.0/libgnome-media-profiles.so
 %{_libdir}/libglade/2.0/libgnome-media-profiles.la
-%{_datadir}/applications/cddb-slave.desktop
 %{_datadir}/applications/gnome-sound-recorder.desktop
 %{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
-%{_datadir}/applications/reclevel.desktop
-%{_datadir}/applications/vumeter.desktop
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
 %_datadir/icons/hicolor/*/*/*.*
-%{_datadir}/idl/*
 
 %files -n  %{lib_name}
 %defattr(-, root, root)
-%{_libdir}/libcddb-slave2.so.%{lib_major}*
 %{_libdir}/libgnome-media-profiles.so.%{lib_major}*
 
 %files -n  %develname
