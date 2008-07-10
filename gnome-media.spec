@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.23.3
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -102,9 +102,9 @@ done
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%define schemas gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %if %mdkversion < 200900
 %update_scrollkeeper
-%define schemas gnome-sound-recorder gnome-audio-profiles gnome-volume-control
 %endif
 %if %mdkversion < 200900
 %post_install_gconf_schemas %schemas
