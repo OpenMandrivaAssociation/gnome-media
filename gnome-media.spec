@@ -20,6 +20,7 @@ BuildRequires: libGConf2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libxrender-devel
 BuildRequires: libcanberra-devel
+BuildRequires: pulseaudio-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool >= 0.35
 BuildRequires: desktop-file-utils
