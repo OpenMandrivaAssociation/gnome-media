@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.24.0.1
-Release: %mkrel 2
+Version: 2.25.1
+Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -102,7 +102,7 @@ done
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%define schemas gnome-sound-recorder gnome-audio-profiles gnome-volume-control
+%define schemas gnome-sound-recorder gnome-audio-profiles
 %if %mdkversion < 200900
 %update_scrollkeeper
 %endif
@@ -135,13 +135,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
-%{_sysconfdir}/gconf/schemas/gnome-volume-control.schemas
 %{_bindir}/*
 %{_libdir}/libglade/2.0/libgnome-media-profiles.so
 %{_libdir}/libglade/2.0/libgnome-media-profiles.la
 %{_datadir}/applications/gnome-sound-recorder.desktop
 %{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
+%_datadir/gnome/autostart/gnome-volume-control-applet.desktop
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
