@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.25.1
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -91,9 +91,6 @@ desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gstreamer-properties.desktop
 
-#hide gnome-volume-control in KDE and ofcourse on Xfce
-echo 'NotShowIn=KDE;XFCE;' >>$RPM_BUILD_ROOT%{_datadir}/applications/gnome-volume-control.desktop
-
 
 %find_lang %{name}-2.0 --with-gnome --all-name
 for omf in %buildroot%_datadir/omf/*/{*-??.omf,};do
@@ -141,7 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libglade/2.0/libgnome-media-profiles.so
 %{_libdir}/libglade/2.0/libgnome-media-profiles.la
 %{_datadir}/applications/gnome-sound-recorder.desktop
-%{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
 %_datadir/gnome/autostart/gnome-volume-control-applet.desktop
 %{_datadir}/gnome-media
