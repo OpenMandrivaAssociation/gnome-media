@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.25.1
-Release: %mkrel 2
+Version: 2.25.5
+Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -138,12 +138,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libglade/2.0/libgnome-media-profiles.so
 %{_libdir}/libglade/2.0/libgnome-media-profiles.la
 %{_datadir}/applications/gnome-sound-recorder.desktop
+%{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
 %_datadir/gnome/autostart/gnome-volume-control-applet.desktop
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
 %_datadir/icons/hicolor/*/*/*.*
+%dir %_datadir/sounds/
+%dir %_datadir/sounds/gnome/
+%_datadir/sounds/gnome/default/
 
 %files -n  %{lib_name}
 %defattr(-, root, root)
