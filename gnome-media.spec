@@ -6,7 +6,7 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.25.5
+Version: 2.25.92
 Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
@@ -21,6 +21,7 @@ BuildRequires: libglade2.0-devel
 BuildRequires: libxrender-devel
 BuildRequires: libcanberra-devel
 BuildRequires: pulseaudio-devel
+BuildRequires: unique-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool >= 0.35
 BuildRequires: desktop-file-utils
@@ -132,6 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f  %{name}-2.0.lang
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
+%_sysconfdir/xdg/autostart/gnome-volume-control-applet.desktop
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
 %{_bindir}/*
@@ -140,7 +142,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/gnome-sound-recorder.desktop
 %{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
-%_datadir/gnome/autostart/gnome-volume-control-applet.desktop
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
