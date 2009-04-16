@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.26.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -91,6 +91,10 @@ rm -f %buildroot%{_libdir}/libglade/2.0/libgnome-media-profiles.a
 desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gstreamer-properties.desktop
+
+desktop-file-install --vendor="" \
+  --add-category="X-MandrivaLinux-CrossDesktop" \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gnome-sound-recorder.desktop
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
