@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.26.0
-Release: %mkrel 2
+Version: 2.27.1
+Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -136,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f  %{name}-2.0.lang
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog NEWS README
+%doc AUTHORS NEWS README
 %_sysconfdir/xdg/autostart/gnome-volume-control-applet.desktop
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
