@@ -49,9 +49,6 @@ is based completely on Open Source software.
 GNOME's powerful environment is pleasing on the eye, easy to
 configure and use.
 
-This package will install such media features as the GNOME
-CD player.
-
 %package -n %{lib_name}
 Summary:	%{summary}
 Group:		System/Libraries
