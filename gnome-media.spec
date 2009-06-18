@@ -40,14 +40,8 @@ Requires(post):	GConf2 >= 2.3.3
 Requires(preun):	GConf2 >= 2.3.3
 
 %description
-GNOME (GNU Network Object Model Environment) is a user-friendly set
-of applications and desktop tools to be used in conjunction with
-a window manager for the X Window System. GNOME is similar
-in purpose and scope to CDE and KDE, but GNOME (as KDE) 
-is based completely on Open Source software.
-
-GNOME's powerful environment is pleasing on the eye, easy to
-configure and use.
+This package contains a few media utilities for the GNOME desktop,
+including a sound recorder and an audio mixer.
 
 %package -n %{lib_name}
 Summary:	%{summary}
