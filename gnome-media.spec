@@ -6,7 +6,7 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.27.5
+Version: 2.27.90.fix
 Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
