@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.28.1
-Release: %mkrel 2
+Version: 2.28.5
+Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -26,16 +26,6 @@ BuildRequires: gnome-doc-utils
 BuildRequires: intltool >= 0.35
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-# (fc) fix startup page (GIT)
-Patch0: 0002-Fix-setting-the-application-s-startup-page.patch
-# (fc) update sink/source description on the fly (GNOME bug #597025) (GIT)
-Patch1: 0003-Update-sink-and-source-descriptions-when-they-change.patch
-# (fc) fix window title at startup (GNOME bug #598887) (GIT)
-Patch2: 0008-Fix-visual-glitches-on-startup.patch
-# (fc) improve layout (GNOME bug #598822) (GIT)
-Patch3: 0009-Fix-some-minor-annoyances-in-the-layout.patch
-# (fc) fix bluriness in level bar (GIT)
-Patch4: 0011-Fix-bluriness-in-level-bar.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
 Requires:   gstreamer0.10-plugins-good
@@ -75,7 +65,6 @@ Panel libraries and header files for GNOME media.
 
 %prep
 %setup -q 
-%apply_patches
 
 %build
 
