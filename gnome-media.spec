@@ -1,5 +1,5 @@
-%define lib_name %mklibname cddb-slave 2 %{lib_major}
-%define develname %mklibname -d cddb-slave 2
+%define lib_name %mklibname gnome-media %{lib_major}
+%define develname %mklibname -d gnome-media
 %define lib_major 0
 %define req_gail_version			0.13
 %define req_gstreamer_version		0.10
@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.28.5
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -47,6 +47,7 @@ including a sound recorder and an audio mixer.
 Summary:	%{summary}
 Group:		System/Libraries
 Requires:	%{name} >= %{version}
+Obsoletes:	%mklibname cddb-slave 2 0
 
 %description -n %{lib_name}
 libraries for running GNOME media.
@@ -55,8 +56,10 @@ libraries for running GNOME media.
 Summary:	Static libraries, include files for GNOME media
 Group:		Development/GNOME and GTK+
 Provides:	libcddb-slave2-devel = %{version}-%{release}
+Provides:	%name-devel = %version-%release
 Requires:	%{lib_name} = %{version}-%{release}
-Obsoletes: %mklibname -d cddb-slave 2 0
+Obsoletes: 	%mklibname -d cddb-slave 2 0
+Obsoletes: 	%mklibname -d cddb-slave 2
 
 %description -n %develname
 Panel libraries and header files for GNOME media.
