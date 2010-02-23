@@ -6,8 +6,8 @@
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.28.5
-Release: %mkrel 2
+Version: 2.29.91
+Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	libgnomeui2-devel >= 2.13.2
@@ -17,7 +17,7 @@ BuildRequires: libgstreamer-plugins-base-devel >= %{req_gstreamer_version}
 BuildRequires: gstreamer0.10-plugins-base
 BuildRequires:   gstreamer0.10-plugins-good
 BuildRequires: libGConf2-devel
-BuildRequires: libglade2.0-devel
+BuildRequires: libgladeui-devel
 BuildRequires: libxrender-devel
 BuildRequires: libcanberra-devel
 BuildRequires: pulseaudio-devel
@@ -26,6 +26,7 @@ BuildRequires: gnome-doc-utils
 BuildRequires: intltool >= 0.35
 BuildRequires: desktop-file-utils
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: gnome-media-2.29.91-format-string.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 URL:		http://www.gnome.org/
 Requires:   gstreamer0.10-plugins-good
@@ -68,6 +69,7 @@ Panel libraries and header files for GNOME media.
 
 %prep
 %setup -q 
+%apply_patches
 
 %build
 
@@ -80,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
-rm -f %buildroot%{_libdir}/libglade/2.0/libgnome-media-profiles.a
+rm -f %buildroot%{_libdir}/glade3/modules/libgnome-media-profiles.a
 
 desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
@@ -135,8 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
 %{_bindir}/*
-%{_libdir}/libglade/2.0/libgnome-media-profiles.so
-%{_libdir}/libglade/2.0/libgnome-media-profiles.la
+%_libdir/glade3/modules/libgnome-media-profiles.la
+%_libdir/glade3/modules/libgnome-media-profiles.so
+%_datadir/glade3/catalogs/gnome-media-profiles.xml
 %{_datadir}/applications/gnome-sound-recorder.desktop
 %{_datadir}/applications/gnome-volume-control.desktop
 %{_datadir}/applications/gstreamer-properties.desktop
