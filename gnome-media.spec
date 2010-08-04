@@ -1,23 +1,24 @@
 %define lib_name %mklibname gnome-media %{lib_major}
 %define develname %mklibname -d gnome-media
 %define lib_major 0
-%define req_gail_version			0.13
+%define req_gail_version                       0.13
 %define req_gstreamer_version		0.10
 
 Summary:	GNOME media programs
 Name:		gnome-media
-Version: 2.30.0
+Version: 2.31.6
 Release: %mkrel 1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
-BuildRequires:	libgnomeui2-devel >= 2.13.2
 BuildRequires:	ncurses-devel scrollkeeper sendmail-command
 BuildRequires: gail-devel >= %{req_gail_version}
 BuildRequires: libgstreamer-plugins-base-devel >= %{req_gstreamer_version}
 BuildRequires: gstreamer0.10-plugins-base
 BuildRequires:   gstreamer0.10-plugins-good
 BuildRequires: libGConf2-devel
-BuildRequires: libgladeui-devel
+BuildRequires: gtk+2-devel
+BuildRequires: glade3-devel
+BuildRequires: libgnome-window-settings-devel
 BuildRequires: libxrender-devel
 BuildRequires: libcanberra-devel
 BuildRequires: pulseaudio-devel
@@ -73,16 +74,14 @@ Panel libraries and header files for GNOME media.
 
 %build
 
-%configure2_5x 
+%configure2_5x  --disable-static
 
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT *.lang
 
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
-
-rm -f %buildroot%{_libdir}/glade3/modules/libgnome-media-profiles.a
 
 desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
@@ -103,32 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %define schemas gnome-sound-recorder gnome-audio-profiles
-%if %mdkversion < 200900
-%update_scrollkeeper
-%endif
-%if %mdkversion < 200900
-%post_install_gconf_schemas %schemas
-%{update_menus}
-%update_icon_cache hicolor
-%endif
 
 %preun
 %preun_uninstall_gconf_schemas %schemas
-
-%if %mdkversion < 200900
-%postun
-%clean_scrollkeeper
-%{clean_menus}
-%clean_icon_cache hicolor
-%endif
-
-%if %mdkversion < 200900
-%post -p /sbin/ldconfig -n %{lib_name}
-%endif
-
-%if %mdkversion < 200900
-%postun -p /sbin/ldconfig -n %{lib_name}
-%endif
 
 %files -f  %{name}-2.0.lang
 %defattr(-, root, root)
@@ -159,6 +135,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %{_libdir}/*.so
 %attr(644,root,root) %{_libdir}/*.la
-%{_libdir}/*.a
 %{_libdir}/pkgconfig/gnome-media-profiles.pc
 %{_includedir}/*
