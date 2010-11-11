@@ -20,7 +20,7 @@ BuildRequires: gtk+2-devel
 BuildRequires: glade3-devel
 BuildRequires: libgnome-window-settings-devel
 BuildRequires: libxrender-devel
-BuildRequires: libcanberra-devel
+BuildRequires: libcanberra-gtk-devel
 BuildRequires: pulseaudio-devel
 BuildRequires: unique-devel
 BuildRequires: gnome-doc-utils
