@@ -7,7 +7,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version: 2.32.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 BuildRequires:	ncurses-devel scrollkeeper sendmail-command
