@@ -79,17 +79,17 @@ Panel libraries and header files for GNOME media.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT *.lang
+rm -rf %{buildroot} *.lang
 
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
 desktop-file-install --vendor="" \
   --add-category="DesktopSettings" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gstreamer-properties.desktop
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/gstreamer-properties.desktop
 
 desktop-file-install --vendor="" \
   --add-category="X-MandrivaLinux-CrossDesktop" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/gnome-sound-recorder.desktop
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/gnome-sound-recorder.desktop
 
 
 %find_lang %{name}-2.0 --with-gnome --all-name
@@ -98,7 +98,7 @@ echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed s!%buil
 done
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %define schemas gnome-sound-recorder gnome-audio-profiles
