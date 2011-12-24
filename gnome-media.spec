@@ -103,7 +103,6 @@ done
 %{_sysconfdir}/gconf/schemas/gnome-sound-recorder.schemas
 %{_sysconfdir}/gconf/schemas/gnome-audio-profiles.schemas
 %{_bindir}/*
-%{_libdir}/glade3/modules/libgnome-media-profiles.la
 %{_libdir}/glade3/modules/libgnome-media-profiles.so
 %{_datadir}/glade3/catalogs/gnome-media-profiles.xml
 %{_datadir}/applications/gnome-sound-recorder.desktop
