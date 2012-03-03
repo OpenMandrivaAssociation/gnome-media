@@ -10,7 +10,7 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz
 BuildRequires: desktop-file-utils
 BuildRequires: gnome-doc-utils
 BuildRequires: intltool >= 0.35
-BuildRequires: pkgconfig(gnome-keybindings)
+BuildRequires: pkgconfig(gnome-keybindings) >= 3.2.2
 BuildRequires: pkgconfig(gstreamer-0.10)
 BuildRequires: pkgconfig(gconf-2.0)
 BuildRequires: pkgconfig(gtk+-3.0)
