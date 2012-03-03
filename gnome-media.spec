@@ -29,25 +29,6 @@ Requires(post,preun):	GConf2
 This package contains a few media utilities for the GNOME desktop,
 including a sound recorder and an audio mixer.
 
-%package -n %{libname}
-Summary:	%{summary}
-Group:		System/Libraries
-Obsoletes:	%mklibname cddb-slave 2 0
-
-%description -n %{libname}
-libraries for running GNOME media.
-
-%package -n %{develname}
-Summary:	Development libraries, include files for GNOME media
-Group:		Development/GNOME and GTK+
-Provides:	%{name}-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
-Obsoletes: 	%mklibname -d cddb-slave 2 0
-Obsoletes: 	%mklibname -d cddb-slave 2
-
-%description -n %{develname}
-Panel libraries and header files for GNOME media.
-
 %prep
 %setup -q 
 %apply_patches
@@ -65,12 +46,14 @@ GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 desktop-file-install --vendor="" \
-  --add-category="DesktopSettings" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/gstreamer-properties.desktop
+	--add-category="DesktopSettings" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/gstreamer-properties.desktop
 
 desktop-file-install --vendor="" \
-  --add-category="X-MandrivaLinux-CrossDesktop" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/gnome-sound-recorder.desktop
+	--add-category="X-MandrivaLinux-CrossDesktop" \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/gnome-sound-recorder.desktop
 
 %find_lang %{name}-2.0 --with-gnome --all-name
 
