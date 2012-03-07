@@ -13,7 +13,7 @@ BuildRequires: intltool >= 0.35
 BuildRequires: pkgconfig(gconf-2.0)
 BuildRequires: pkgconfig(gnome-keybindings)
 BuildRequires: pkgconfig(gstreamer-0.10)
-BuildRequires: pkgconfig(gstreamer-plugins-base-0.10
+BuildRequires: pkgconfig(gstreamer-plugins-base-0.10)
 BuildRequires: pkgconfig(gtk+-3.0)
 BuildRequires: pkgconfig(libcanberra-gtk3)
 BuildRequires: pkgconfig(libgnome-media-profiles-3.0)
