@@ -36,7 +36,8 @@ including a sound recorder and an audio mixer.
 
 %build
 %configure2_5x \
-	--disable-static
+	--disable-static \
+	--disable-scrollkeeper
 
 %make
 
