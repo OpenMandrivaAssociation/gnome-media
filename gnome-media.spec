@@ -1,11 +1,11 @@
 Summary:	GNOME media programs
 Name:		gnome-media
-Version:	2.91.2
+Version:	3.4.0
 Release:	1
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 URL:		http://www.gnome.org/
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
 BuildRequires: desktop-file-utils
 BuildRequires: gnome-doc-utils
@@ -35,14 +35,12 @@ including a sound recorder and an audio mixer.
 %apply_patches
 
 %build
-
 %configure2_5x \
 	--disable-static
 
 %make
 
 %install
-rm -rf %{buildroot} *.lang
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
