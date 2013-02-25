@@ -19,6 +19,7 @@ BuildRequires: pkgconfig(libcanberra-gtk3)
 BuildRequires: pkgconfig(libgnome-media-profiles-3.0)
 BuildRequires: pkgconfig(libpulse)
 BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires:	gnome-doc-utils
 
 Requires:   gstreamer0.10-plugins-good
 Requires:   gstreamer0.10-plugins-base
