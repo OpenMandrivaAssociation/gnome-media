@@ -7,24 +7,24 @@ Group:		Graphical desktop/GNOME
 URL:		http://www.gnome.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
-BuildRequires: desktop-file-utils
-BuildRequires: gnome-doc-utils
-BuildRequires: intltool >= 0.35
-BuildRequires: pkgconfig(gconf-2.0)
-BuildRequires: pkgconfig(gnome-keybindings)
-BuildRequires: pkgconfig(gstreamer-0.10)
-BuildRequires: pkgconfig(gstreamer-plugins-base-0.10)
-BuildRequires: pkgconfig(gtk+-3.0)
-BuildRequires: pkgconfig(libcanberra-gtk3)
-BuildRequires: pkgconfig(libgnome-media-profiles-3.0)
-BuildRequires: pkgconfig(libpulse)
-BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires:	desktop-file-utils
+BuildRequires:	gnome-doc-utils
+BuildRequires:	intltool >= 0.35
+BuildRequires:	pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(gnome-keybindings)
+BuildRequires:	pkgconfig(gstreamer-0.10)
+BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	pkgconfig(libgnome-media-profiles-3.0)
+BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	gnome-doc-utils
 
-Requires:   gstreamer0.10-plugins-good
-Requires:   gstreamer0.10-plugins-base
-Suggests:   gstreamer0.10-flac
-Suggests:   gstreamer0.10-speex
+Requires:	gstreamer0.10-plugins-good
+Requires:	gstreamer0.10-plugins-base
+Suggests:	gstreamer0.10-flac
+Suggests:	gstreamer0.10-speex
 Requires(post,preun):	GConf2
 
 %description
@@ -71,4 +71,3 @@ desktop-file-install --vendor="" \
 %dir %{_datadir}/sounds/
 %dir %{_datadir}/sounds/gnome/
 %{_datadir}/sounds/gnome/default/
-
