@@ -1,30 +1,33 @@
+%define url_ver %(echo %{version} | cut -d. -f1,2)
+%define	gstapi	0.10
+
 Summary:	GNOME media programs
 Name:		gnome-media
 Version:	3.4.0
 Release:	2
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
-URL:		http://www.gnome.org/
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
+Url:		http://www.gnome.org/
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-media/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	desktop-file-utils
 BuildRequires:	gnome-doc-utils
 BuildRequires:	intltool >= 0.35
 BuildRequires:	pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(gnome-doc-utils)
 BuildRequires:	pkgconfig(gnome-keybindings)
-BuildRequires:	pkgconfig(gstreamer-0.10)
-BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
+BuildRequires:	pkgconfig(gstreamer-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libcanberra-gtk3)
 BuildRequires:	pkgconfig(libgnome-media-profiles-3.0)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:	pkgconfig(gnome-doc-utils)
 
-Requires:	gstreamer0.10-plugins-good
-Requires:	gstreamer0.10-plugins-base
-Suggests:	gstreamer0.10-flac
-Suggests:	gstreamer0.10-speex
+Requires:	gstreamer%{gstapi}-plugins-good
+Requires:	gstreamer%{gstapi}-plugins-base
+Suggests:	gstreamer%{gstapi}-flac
+Suggests:	gstreamer%{gstapi}-speex
 Requires(post,preun):	GConf2
 
 %description
@@ -67,7 +70,8 @@ desktop-file-install --vendor="" \
 %{_datadir}/gnome-media
 %{_datadir}/gnome-sound-recorder
 %{_datadir}/gstreamer-properties
-%{_datadir}/icons/hicolor/*/*/*.*
+%{_iconsdir}/hicolor/*/*/*.*
 %dir %{_datadir}/sounds/
 %dir %{_datadir}/sounds/gnome/
 %{_datadir}/sounds/gnome/default/
+
