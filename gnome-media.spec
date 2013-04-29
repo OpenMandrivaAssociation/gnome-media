@@ -47,7 +47,6 @@ including a sound recorder and an audio mixer.
 
 %install
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
-find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
 desktop-file-install --vendor="" \
 	--add-category="DesktopSettings" \
