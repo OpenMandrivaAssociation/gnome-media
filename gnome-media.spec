@@ -4,7 +4,7 @@
 Summary:	GNOME media programs
 Name:		gnome-media
 Version:	3.4.0
-Release:	3
+Release:	4
 License:	GPLv2+ and GFDL+
 Group:		Graphical desktop/GNOME
 Url:		http://www.gnome.org/
